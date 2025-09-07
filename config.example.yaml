@@ -1,0 +1,17 @@
+# Example configuration file for the Knowledge Graph MCP Server
+
+neo4j:
+  read_only:
+    host: "bolt://localhost:7687"
+    username: "readonly_user"
+    password: "readonly_password"
+  write:
+    host: "bolt://localhost:7687"
+    username: "write_user"
+    password: "write_password"
+
+api_keys:
+  - key: "example_api_key_1"
+    user: "Hans Müller"
+  - key: "example_api_key_2"
+    user: "max.meier@example.com"
