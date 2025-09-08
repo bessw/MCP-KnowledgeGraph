@@ -1,0 +1,9 @@
+{
+	"servers": {
+		"Knowledge Graph MCP Server": {
+			"url": "https://localhost:8000",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}
