@@ -48,18 +48,20 @@ class ConfigManager:
         """Load configuration from YAML file"""
         if not self.config_path.exists():
             raise FileNotFoundError(f"Configuration file not found: {self.config_path}")
-        
+
         with open(self.config_path, 'r') as f:
             config_data = yaml.safe_load(f)
-        
-        # Convert nested dicts to Neo4jConfig objects
+
+        # Add host to each Neo4jConfig mapping
+        host = config_data['neo4j'].pop('host')
         neo4j_configs = {}
         for key, neo4j_data in config_data['neo4j'].items():
+            neo4j_data['host'] = host
             neo4j_configs[key] = Neo4jConfig(**neo4j_data)
-        
+
         config_data['neo4j'] = neo4j_configs
         config_data['api_keys'] = [ApiKeyConfig(**api_key) for api_key in config_data['api_keys']]
-        
+
         return Config(**config_data)
 
     def _hash_api_keys(self) -> Dict[str, str]:
